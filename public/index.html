@@ -18,7 +18,8 @@
     <main class="app-shell">
       <h1 class="app-title">Tasks</h1>
       <form class="task-form" autocomplete="off">
-        <input class="task-input" type="text" name="task" aria-label="Task" placeholder="Add a new task" />
+        <input class="task-input" type="text" name="task" aria-label="Task" placeholder="Add a new task" aria-describedby="task-error" />
+        <div class="form-error" id="task-error" aria-live="polite"></div>
         <button class="add-button" type="submit">ADD</button>
       </form>
       <ul class="task-list" aria-live="polite"></ul>
