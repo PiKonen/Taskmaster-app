@@ -1,16 +1,17 @@
-body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:40px;background:#f6f8fa;color:#111}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:40px;background:#2A3B75;color:#fff}
 .app-shell{max-width:800px;margin:0 auto}
-.brand-header{color:#2A3B75;font-size:20px;line-height:1.2;margin:0 0 12px;font-weight:700}
+.brand-header{color:#fff;font-size:20px;line-height:1.2;margin:0 0 12px;font-weight:700}
 .app-title{font-size:28px;line-height:1.2;margin:0 0 16px}
 .task-form{display:flex;gap:8px;margin:16px 0}
-.task-input{flex:1;padding:10px 12px;border:1px solid #d0d7de;border-radius:8px;background:#fff;color:#111}
-.add-button{padding:10px 16px;background:#0969da;color:#fff;border:0;border-radius:8px;cursor:pointer}
+.task-input{flex:1;padding:10px 12px;border:1px solid rgba(255,255,255,0.18);border-radius:8px;background:rgba(255,255,255,0.06);color:#fff}
+.task-input::placeholder{color:rgba(255,255,255,0.7)}
+.add-button{padding:10px 16px;background:rgba(255,255,255,0.12);color:#fff;border:0;border-radius:8px;cursor:pointer}
 .add-button:disabled{opacity:.6;cursor:not-allowed}
 .task-list{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.task-item{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #d0d7de;border-radius:8px;padding:10px 12px}
-.task-text{margin:0;word-break:break-word;flex:1;padding-right:12px}
-.delete-button{background:#f6f8fa;border:1px solid #d0d7de;color:#d1242f;padding:6px 10px;border-radius:6px;cursor:pointer}
-.delete-button:hover{background:#f0f3f6}
+.task-item{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px}
+.task-text{margin:0;word-break:break-word;flex:1;padding-right:12px;color:#fff}
+.delete-button{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer}
+.delete-button:hover{background:rgba(255,255,255,0.06)}
 @media (max-width:600px){
   body{padding:24px}
   .task-form{flex-direction:column}
