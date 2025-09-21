@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>App Placeholder</title>
-    <style>
-      body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:40px;background:#f6f8fa;color:#111}
-      .container{max-width:800px;margin:0 auto}
-      .title{font-size:28px;margin-bottom:10px}
-      .note{color:#555}
-    </style>
+    <title>Tasks</title>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h1 class="title">App is running</h1>
-      <p class="note">A minimal placeholder server was created because the repository had no package.json. This gets the dev server online so you can inspect the project.</p>
+    <div class="app-shell">
+      <h1 class="app-title">Tasks</h1>
+      <form class="task-form" autocomplete="off">
+        <input class="task-input" type="text" name="task" aria-label="Task" placeholder="Add a new task" />
+        <button class="add-button" type="submit">ADD</button>
+      </form>
+      <ul class="task-list" aria-live="polite"></ul>
     </div>
+    <script src="./app.js"></script>
   </body>
 </html>
