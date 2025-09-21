@@ -7,15 +7,19 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="brand-header">Mindmate</header>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="brand-header">Mindmate</div>
+      </div>
+    </header>
+    <main class="app-shell">
       <h1 class="app-title">Tasks</h1>
       <form class="task-form" autocomplete="off">
         <input class="task-input" type="text" name="task" aria-label="Task" placeholder="Add a new task" />
         <button class="add-button" type="submit">ADD</button>
       </form>
       <ul class="task-list" aria-live="polite"></ul>
-    </div>
+    </main>
     <script src="./app.js"></script>
   </body>
 </html>
