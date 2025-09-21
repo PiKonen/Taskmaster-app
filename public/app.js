@@ -32,13 +32,21 @@
     }
   }
 
-  form.addEventListener('submit',function(e){
+  form.addEventListener('submit', function(e){
     e.preventDefault();
-    var text=(input.value||'').trim();
-    if(!text){return;}
-    var newTask={id:createId(),text:text};
+    var text = (input.value || '').trim();
+    var errorEl = document.getElementById('task-error');
+    if (!text) {
+      if (errorEl) { errorEl.textContent = 'Please enter a task.'; }
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+      return;
+    }
+    if (errorEl) { errorEl.textContent = ''; }
+    input.removeAttribute('aria-invalid');
+    var newTask = { id: createId(), text: text };
     tasks.unshift(newTask);
-    input.value='';
+    input.value = '';
     input.focus();
     render();
   });
