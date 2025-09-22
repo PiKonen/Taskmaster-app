@@ -11,7 +11,7 @@
   </head>
   <body>
     <header class="header">
-      <h1 class="brand-header">Taskmaster</h1>
+      <div class="brand-header">Taskmaster</div>
       <button class="menu-button" aria-label="Open menu">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 20H35M5 10H35M5 30H35" stroke="#FEE9E7" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -20,6 +20,11 @@
     </header>
 
     <main class="main-container">
+      <section class="tasks-section">
+        <h1 class="section-title">My tasks</h1>
+        <ul class="task-list" aria-live="polite"></ul>
+      </section>
+
       <section class="task-section">
         <h2 class="section-title">Add new task</h2>
         <form class="task-form" autocomplete="off">
@@ -27,11 +32,6 @@
           <input class="task-input" type="text" name="task" aria-label="Task" placeholder="Add a new task" aria-describedby="task-error" />
           <button class="add-button" type="submit">ADD</button>
         </form>
-      </section>
-
-      <section class="tasks-section">
-        <h2 class="section-title">My tasks</h2>
-        <ul class="task-list" aria-live="polite"></ul>
       </section>
     </main>
 
