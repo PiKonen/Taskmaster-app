@@ -17,17 +17,19 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
-/* Header styles */
+/* Header - exact Figma dimensions */
 .header {
-  background: #1e1e1e;
-  color: #fff;
-  padding: 18px 20px;
   display: flex;
-  align-items: center;
+  padding: 18px 20px;
   justify-content: space-between;
-  min-height: 76px;
+  align-items: center;
+  background: rgba(30, 30, 30, 1);
+  width: 100%;
+  height: 76px;
+  position: relative;
 }
 
 .header-inner {
@@ -35,16 +37,16 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .brand-header {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.48px;
   color: #fff;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -0.48px;
   margin: 0;
 }
 
@@ -65,37 +67,48 @@ body {
   height: 40px;
 }
 
-/* Main container */
+/* Main container - exact Figma positioning */
 .main-container {
-  flex: 1;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+  display: flex;
+  width: 335px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  position: absolute;
+  left: 20px;
+  top: 68px;
+  min-height: calc(100vh - 68px - 616px); /* Account for footer */
 }
 
-/* Section styles */
+/* Section styles - exact Figma dimensions */
 .task-section, .tasks-section {
-  margin-bottom: 24px;
+  align-self: stretch;
 }
 
 .section-title {
+  display: flex;
+  height: 60px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: stretch;
+  color: #000;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 30px;
+  font-style: normal;
   font-weight: 700;
   line-height: 36px;
   letter-spacing: -0.225px;
-  color: #000;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: flex-end;
-  min-height: 60px;
+  margin: 0;
 }
 
-/* Task form styles */
+/* Task form - exact Figma layout */
 .task-form {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
   gap: 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
 }
 
 .form-error {
@@ -103,26 +116,25 @@ body {
   font-size: 14px;
   margin: 0;
   min-height: 20px;
+  flex-basis: 100%;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: stretch;
+  display: contents;
 }
 
 .task-input {
   height: 44px;
-  padding: 12px 16px;
-  border: 1px solid #6B7280;
+  flex: 1 0 0;
   border-radius: 4px;
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
+  border: 1px solid #6B7280;
   background: #fff;
   color: #000;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
   outline: none;
-  transition: border-color 0.2s ease;
+  min-width: 0;
 }
 
 .task-input:focus {
@@ -135,24 +147,28 @@ body {
 
 .add-button {
   display: flex;
+  width: 335px;
   padding: 12px 32px;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background: #009951;
-  color: #fff;
+  background: rgba(0, 153, 81, 1);
   border: none;
+  cursor: pointer;
+}
+
+.add-button span,
+.add-button {
+  color: #fff;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 22px;
+  font-style: normal;
   font-weight: 700;
   line-height: 20px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  width: 100%;
-  min-height: 44px;
 }
 
 .add-button:hover {
-  background: #00994d;
+  background: rgba(0, 153, 81, 0.9);
 }
 
 .add-button:disabled {
@@ -160,13 +176,15 @@ body {
   cursor: not-allowed;
 }
 
-/* Task list styles */
+/* Task list - exact Figma styling */
 .task-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .task-item {
@@ -174,11 +192,7 @@ body {
   padding: 20px 0;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #94A3B8;
-  gap: 8px;
-}
-
-.task-item:first-child {
+  align-self: stretch;
   border-top: 1px solid #94A3B8;
 }
 
@@ -186,7 +200,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 1;
+  flex: 1 0 0;
 }
 
 .task-radio {
@@ -201,7 +215,6 @@ body {
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-  transition: all 0.2s ease;
 }
 
 .task-radio:hover {
@@ -219,22 +232,18 @@ body {
   height: 6px;
   border-radius: 50%;
   background: #fff;
-  position: absolute;
-}
-
-.task-radio:focus {
-  outline: 2px solid #009951;
-  outline-offset: 2px;
 }
 
 .task-text {
-  flex: 1;
+  flex: 1 0 0;
+  color: #000;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
+  font-style: normal;
   font-weight: 700;
   line-height: 28px;
-  color: #000;
-  word-break: break-word;
   margin: 0;
+  word-break: break-word;
 }
 
 .delete-button {
@@ -247,7 +256,6 @@ body {
   justify-content: center;
   width: 24px;
   height: 24px;
-  flex-shrink: 0;
 }
 
 .delete-button svg {
@@ -259,46 +267,67 @@ body {
   stroke: #d1242f;
 }
 
-/* Footer styles */
+/* Footer - exact Figma dimensions */
 .footer {
+  display: flex;
+  width: 375px;
+  padding: 0 24px;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 96px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  min-height: 616px;
   background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 64px 24px;
-  margin-top: auto;
 }
 
 .footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  padding: 64px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 64px;
+  align-self: stretch;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 .footer-content {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
 }
 
 .company-info {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
 }
 
 .company-name {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: -0.36px;
   color: #000;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 145%;
+  letter-spacing: -0.36px;
   margin: 0;
 }
 
 .company-description {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: -0.08px;
+  align-self: stretch;
   color: rgba(0, 0, 0, 0.55);
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: -0.08px;
   margin: 0;
 }
 
@@ -325,23 +354,32 @@ body {
 .footer-navigation {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 40px;
+  align-self: stretch;
 }
 
 .nav-column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   gap: 8px;
 }
 
 .nav-header {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: -0.08px;
-  color: #000;
-  margin: 0 0 8px 0;
+  display: flex;
   padding-bottom: 8px;
+  align-items: flex-start;
+  align-self: stretch;
+  color: #000;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 145%;
+  letter-spacing: -0.08px;
+  margin: 0;
 }
 
 .nav-list {
@@ -351,14 +389,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-self: stretch;
 }
 
 .nav-link {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: -0.08px;
+  align-self: stretch;
   color: rgba(0, 0, 0, 0.55);
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: -0.08px;
   text-decoration: none;
 }
 
@@ -367,29 +409,33 @@ body {
   text-decoration: underline;
 }
 
-/* Responsive design */
+/* Responsive design for larger screens */
 @media (min-width: 768px) {
-  .header {
-    padding: 18px 40px;
-  }
-  
   .main-container {
-    padding: 40px;
+    width: calc(100% - 40px);
+    max-width: 800px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
-  .form-group {
+  .add-button {
+    width: auto;
+    min-width: 120px;
+  }
+  
+  .task-form {
     flex-direction: row;
     align-items: flex-start;
-    gap: 24px;
   }
   
   .task-input {
     flex: 1;
   }
   
-  .add-button {
-    width: auto;
-    min-width: 120px;
+  .footer {
+    width: 100%;
+    position: relative;
+    margin-top: auto;
   }
   
   .footer-content {
@@ -398,55 +444,10 @@ body {
     align-items: flex-start;
   }
   
-  .company-info {
-    flex: 1;
-    max-width: 400px;
-  }
-  
   .footer-navigation {
     flex-direction: row;
     gap: 80px;
   }
-}
-
-@media (min-width: 1024px) {
-  .header-inner {
-    padding: 0 40px;
-  }
-  
-  .main-container {
-    padding: 60px 40px;
-  }
-  
-  .section-title {
-    font-size: 36px;
-    line-height: 42px;
-  }
-  
-  .footer {
-    padding: 80px 40px;
-  }
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 /* Focus styles for accessibility */
@@ -455,7 +456,15 @@ body {
 .menu-button:focus,
 .delete-button:focus,
 .nav-link:focus,
-.social-links a:focus {
+.social-links a:focus,
+.task-radio:focus {
   outline: 2px solid #009951;
   outline-offset: 2px;
+}
+
+/* Ensure body takes full height on mobile */
+@media (max-width: 767px) {
+  body {
+    min-height: 1385px; /* Match Figma design height */
+  }
 }
