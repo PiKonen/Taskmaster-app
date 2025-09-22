@@ -185,6 +185,11 @@ body {
   padding: 0;
 }
 
+/* Ensure at least 24px spacing between the "My tasks" title and the first task row */
+.task-list > .task-item:first-child {
+  margin-top: 24px;
+}
+
 .task-item {
   display: flex;
   padding: 20px 0;
