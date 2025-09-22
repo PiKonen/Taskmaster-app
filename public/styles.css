@@ -102,9 +102,10 @@ body {
 /* Task form - exact Figma layout */
 .task-form {
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: flex-end; /* align button to bottom of field */
   align-content: flex-start;
-  gap: 24px;
+  gap: 16px;
   align-self: stretch;
   flex-wrap: wrap;
 }
@@ -113,7 +114,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1 0 0;
+  flex: 1 1 0;
   min-width: 0;
 }
 
@@ -125,6 +126,27 @@ body {
   line-height: 28px;
   margin-bottom: 0;
   color: #000;
+}
+
+.add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background: rgba(0, 153, 81, 1);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 96px;
+  align-self: flex-end;
+}
+
+.add-button:hover {
+  background: rgba(0, 153, 81, 0.9);
 }
 
 .input-label {
