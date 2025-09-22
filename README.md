@@ -1,2 +1,3 @@
-# MindMap
+# Taskmaster
+
 Own test project
