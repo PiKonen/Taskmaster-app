@@ -1,5 +1,5 @@
 body{font-family:"Open Sans",Arial,Helvetica,sans-serif;margin:0;padding:40px;background:#f6f8fa;color:#111}
-.app-shell{max-width:800px;margin:20px auto;padding:24px;background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(16,24,40,0.06)}
+.app-shell{width:100%;max-width:none;margin:20px 0;padding:24px;background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(16,24,40,0.06)}
 .site-header{background:#2A3B75;color:#fff;padding:16px 0}
 .site-header-inner{max-width:800px;margin:0 auto;padding:0 16px}
 .brand-header{color:#fff;font-size:20px;line-height:1.2;margin:0;font-weight:700}
