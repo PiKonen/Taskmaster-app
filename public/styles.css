@@ -109,6 +109,24 @@ body {
   flex-wrap: wrap;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.input-label {
+  display: block;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  margin-bottom: 0;
+  color: #000;
+}
+
 .input-label {
   display: block;
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
