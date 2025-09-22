@@ -146,13 +146,7 @@
     }
   });
 
-  // Initialize with default tasks to match Figma design
-  tasks = [
-    { id: createId(), text: 'Default', completed: false },
-    { id: createId(), text: 'Default', completed: false },
-    { id: createId(), text: 'Default', completed: false },
-    { id: createId(), text: 'Default', completed: false },
-    { id: createId(), text: 'Default', completed: false }
-  ];
+  // Start with an empty task list
+  tasks = [];
   render();
 })();
