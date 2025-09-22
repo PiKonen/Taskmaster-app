@@ -146,14 +146,13 @@
     }
   });
 
-  // Initialize with some sample tasks for demonstration (optional)
-  // Uncomment the lines below to show sample tasks on page load
-  /*
+  // Initialize with default tasks to match Figma design
   tasks = [
-    { id: createId(), text: 'Sample task 1', completed: false },
-    { id: createId(), text: 'Sample task 2', completed: true },
-    { id: createId(), text: 'Sample task 3', completed: false }
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false }
   ];
   render();
-  */
 })();
