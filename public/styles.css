@@ -200,19 +200,31 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s ease;
 }
 
-.task-radio:checked {
+.task-radio:hover {
+  border-color: #009951;
+}
+
+.task-radio.checked {
   background: #009951;
   border-color: #009951;
 }
 
-.task-radio:checked::after {
+.task-radio.checked::after {
   content: '';
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: #fff;
+  position: absolute;
+}
+
+.task-radio:focus {
+  outline: 2px solid #009951;
+  outline-offset: 2px;
 }
 
 .task-text {
