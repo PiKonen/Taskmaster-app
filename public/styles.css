@@ -109,6 +109,16 @@ body {
   flex-wrap: wrap;
 }
 
+.input-label {
+  display: block;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  margin-bottom: 8px;
+  color: #000;
+}
+
 .form-error {
   color: #d1242f;
   font-size: 14px;
