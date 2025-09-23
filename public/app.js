@@ -66,6 +66,14 @@
     // clear
     list.innerHTML = '';
 
+    // Robustly determine open tasks: support boolean or string values for `completed`
+    var openCount = tasks.filter(function(t){
+      var completed = (t.completed === true || t.completed === 'true');
+      return !completed;
+    }).length;
+    var countEl = document.getElementById('open-count');
+    if (countEl) countEl.textContent = '(' + openCount + ')';
+
     if (!tasks || tasks.length === 0){
       if (pagination) pagination.innerHTML = '';
       var empty = document.createElement('li');
@@ -151,7 +159,7 @@
     var radio = e.target.closest('.task-radio');
     if (radio){
       var id2 = radio.dataset.id;
-      tasks = tasks.map(function(t){ if (t.id === id2) return { id: t.id, text: t.text, completed: !t.completed }; return t; });
+      tasks = tasks.map(function(t){ if (t.id === id2){ var currently = (t.completed === true || t.completed === 'true'); return { id: t.id, text: t.text, completed: !currently }; } return t; });
       render();
       return;
     }

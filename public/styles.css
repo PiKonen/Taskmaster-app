@@ -57,6 +57,9 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,system-ui,Segoe UI,Rob
 .pager-button.is-disabled{opacity:.5;pointer-events:none}
 .pager-ellipsis{color:var(--muted);padding:0 4px}
 
+/* Open count next to heading */
+.open-count{font-weight:700;margin-left:8px;color:var(--muted)}
+
 /* Responsive tweaks */
 @media (min-width:768px){
   .app-root{max-width:800px}
