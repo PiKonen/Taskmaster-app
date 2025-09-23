@@ -184,10 +184,13 @@
 
   // Set initial list offset and update on resize
   function initOffsets(){
-    updateListOffset();
-    window.addEventListener('resize', function(){
-      updateListOffset();
-    });
+    // Call on next tick to ensure styles applied
+    setTimeout(updateListOffset, 50);
+    window.addEventListener('resize', updateListOffset);
+    // Also update when fonts load (font may change layout)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateListOffset);
+    }
   }
 
   initOffsets();
