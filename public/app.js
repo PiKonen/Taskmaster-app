@@ -108,25 +108,25 @@
     e.preventDefault();
     var text = (input.value || '').trim();
     var errorEl = document.getElementById('task-error');
-    
+
     if (!text) {
-      if (errorEl) { 
-        errorEl.textContent = 'Please enter a task.'; 
+      if (errorEl) {
+        errorEl.textContent = 'Please enter a task.';
       }
       input.setAttribute('aria-invalid', 'true');
       input.focus();
       return;
     }
-    
-    if (errorEl) { 
-      errorEl.textContent = ''; 
+
+    if (errorEl) {
+      errorEl.textContent = '';
     }
     input.removeAttribute('aria-invalid');
-    
-    var newTask = { 
-      id: createId(), 
-      text: text, 
-      completed: false 
+
+    var newTask = {
+      id: createId(),
+      text: text,
+      completed: false
     };
     tasks.unshift(newTask);
     input.value = '';
@@ -139,7 +139,7 @@
     var target = e.target;
     var button = target.closest('button');
     var radio = target.closest('.task-radio');
-    
+
     // Handle delete button clicks
     if (button && button.classList.contains('delete-button')) {
       var id = button.getAttribute('data-id');
@@ -149,7 +149,7 @@
       render();
       return;
     }
-    
+
     // Handle radio button clicks (toggle completion)
     if (radio) {
       var id = radio.getAttribute('data-id');
@@ -171,7 +171,7 @@
   // Handle keyboard navigation for radio buttons
   list.addEventListener('keydown', function(e) {
     var target = e.target;
-    
+
     if (target.classList.contains('task-radio') && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
       target.click();
@@ -181,4 +181,14 @@
   // Start with no tasks; show empty state
   tasks = [];
   render();
+
+  // Set initial list offset and update on resize
+  function initOffsets(){
+    updateListOffset();
+    window.addEventListener('resize', function(){
+      updateListOffset();
+    });
+  }
+
+  initOffsets();
 })();
