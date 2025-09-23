@@ -1,202 +1,138 @@
 (function(){
+  // Elements
   var form = document.querySelector('.task-form');
-  var input = document.querySelector('.task-input');
+  var input = document.getElementById('task-input');
   var list = document.querySelector('.task-list');
+  var header = document.querySelector('.app-header');
+  var topArea = document.getElementById('top-area');
+  var listArea = document.getElementById('list-area');
+
+  // State
   var tasks = [];
-  var idSeq = 0;
 
-  function createId(){
-    idSeq += 1;
-    return Date.now().toString(36) + '-' + idSeq.toString(36);
-  }
+  // Utilities
+  function createId(){ return Date.now().toString(36) + '-' + Math.floor(Math.random()*10000).toString(36); }
 
-  function updateListOffset(){
-    var header = document.querySelector('.app-header');
-    var topArea = document.getElementById('top-area');
-    var listArea = document.getElementById('list-area');
-    var headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
-    // set top-area directly below header to avoid overlap
-    if (topArea) {
-      topArea.style.top = headerH + 'px';
-    }
-    // compute offset for list area: header + topArea heights
-    var topAreaH = topArea ? Math.ceil(topArea.getBoundingClientRect().height) : 0;
-    var offset = headerH + topAreaH;
-    if (listArea) listArea.style.paddingTop = offset + 'px';
-  }
-
+  // Render list or empty state
   function render(){
-    while(list.firstChild){
-      list.removeChild(list.firstChild);
-    }
+    // clear
+    list.innerHTML = '';
 
-    // Empty state
-    if (!tasks || tasks.length === 0) {
-      var emptyLi = document.createElement('li');
-      emptyLi.className = 'task-empty';
-      emptyLi.setAttribute('aria-live', 'polite');
-      emptyLi.style.padding = '20px 0';
-      emptyLi.style.textAlign = 'center';
-      emptyLi.style.color = 'var(--light-text)';
-      emptyLi.style.width = '100%';
-
-      var emptyText = document.createElement('div');
-      emptyText.textContent = 'No tasks, congrats!';
-      emptyText.style.fontFamily = "DM Sans, -apple-system, Roboto, Helvetica, sans-serif";
-      emptyText.style.fontSize = '16px';
-      emptyText.style.color = '#3D4147';
-
-      emptyLi.appendChild(emptyText);
-      list.appendChild(emptyLi);
-      updateListOffset();
+    if (!tasks || tasks.length === 0){
+      var empty = document.createElement('li');
+      empty.className = 'task-empty';
+      empty.setAttribute('aria-live','polite');
+      empty.textContent = 'No tasks, congrats!';
+      list.appendChild(empty);
+      updateOffsets();
       return;
     }
 
-    for(var i = 0; i < tasks.length; i++){
-      var task = tasks[i];
+    tasks.forEach(function(task){
       var li = document.createElement('li');
       li.className = 'task-item';
       li.setAttribute('data-id', task.id);
 
-      // Create radio button group
-      var radioGroup = document.createElement('div');
-      radioGroup.className = 'task-radio-group';
+      var left = document.createElement('div');
+      left.className = 'task-left';
 
-      // Create radio button (styled as circle)
-      var radioButton = document.createElement('div');
-      radioButton.className = 'task-radio';
-      radioButton.setAttribute('role', 'checkbox');
-      radioButton.setAttribute('aria-checked', task.completed ? 'true' : 'false');
-      radioButton.setAttribute('tabindex', '0');
-      radioButton.setAttribute('data-id', task.id);
-
-      if (task.completed) {
-        radioButton.classList.add('checked');
+      var radio = document.createElement('div');
+      radio.className = 'task-radio';
+      radio.setAttribute('role','checkbox');
+      radio.setAttribute('aria-checked', task.completed ? 'true' : 'false');
+      radio.setAttribute('tabindex','0');
+      radio.dataset.id = task.id;
+      if (task.completed){
+        radio.style.background = 'var(--brand)';
+        radio.style.borderColor = 'var(--brand)';
       }
 
-      // Create task text
-      var taskText = document.createElement('div');
-      taskText.className = 'task-text';
-      taskText.textContent = task.text;
-      if (task.completed) {
-        taskText.style.textDecoration = 'line-through';
-        taskText.style.opacity = '0.6';
-      }
+      var txt = document.createElement('div');
+      txt.className = 'task-text';
+      txt.textContent = task.text;
+      if (task.completed){ txt.style.textDecoration = 'line-through'; txt.style.opacity = '0.6'; }
 
-      radioGroup.appendChild(radioButton);
-      radioGroup.appendChild(taskText);
+      left.appendChild(radio);
+      left.appendChild(txt);
 
-      // Create delete button with X icon matching Figma design
-      var deleteBtn = document.createElement('button');
-      deleteBtn.className = 'delete-button';
-      deleteBtn.type = 'button';
-      deleteBtn.setAttribute('data-id', task.id);
-      deleteBtn.setAttribute('aria-label', 'Delete task: ' + task.text);
+      var del = document.createElement('button');
+      del.className = 'delete-button';
+      del.type = 'button';
+      del.dataset.id = task.id;
+      del.setAttribute('aria-label','Delete task: ' + task.text);
+      del.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6L18 18M6 18L18 6" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>';
 
-      // Add delete icon SVG from Figma design
-      deleteBtn.innerHTML = `
-        <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M26.25 13.125L17.5 21.875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M17.5 13.125L26.25 21.875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `;
-
-      li.appendChild(radioGroup);
-      li.appendChild(deleteBtn);
+      li.appendChild(left);
+      li.appendChild(del);
       list.appendChild(li);
-    }
-    updateListOffset();
+    });
+
+    updateOffsets();
   }
 
-  // Handle form submission
+  // Add task
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var text = (input.value || '').trim();
-    var errorEl = document.getElementById('task-error');
+    var val = (input.value || '').trim();
+    var err = document.getElementById('task-error');
+    if (!val){ if (err) { err.textContent = 'Please enter a task.'; } input.focus(); return; }
+    if (err) err.textContent = '';
 
-    if (!text) {
-      if (errorEl) {
-        errorEl.textContent = 'Please enter a task.';
-      }
-      input.setAttribute('aria-invalid', 'true');
-      input.focus();
-      return;
-    }
-
-    if (errorEl) {
-      errorEl.textContent = '';
-    }
-    input.removeAttribute('aria-invalid');
-
-    var newTask = {
-      id: createId(),
-      text: text,
-      completed: false
-    };
-    tasks.unshift(newTask);
+    tasks.unshift({ id: createId(), text: val, completed: false });
     input.value = '';
-    input.focus();
     render();
   });
 
-  // Handle task interactions (delete and toggle)
+  // Delegate clicks (delete, toggle)
   list.addEventListener('click', function(e){
-    var target = e.target;
-    var button = target.closest('button');
-    var radio = target.closest('.task-radio');
-
-    // Handle delete button clicks
-    if (button && button.classList.contains('delete-button')) {
-      var id = button.getAttribute('data-id');
-      tasks = tasks.filter(function(task) {
-        return task.id !== id;
-      });
+    var btn = e.target.closest('.delete-button');
+    if (btn){
+      var id = btn.dataset.id;
+      tasks = tasks.filter(function(t){ return t.id !== id; });
       render();
       return;
     }
 
-    // Handle radio button clicks (toggle completion)
-    if (radio) {
-      var id = radio.getAttribute('data-id');
-      tasks = tasks.map(function(task) {
-        if (task.id === id) {
-          return {
-            id: task.id,
-            text: task.text,
-            completed: !task.completed
-          };
-        }
-        return task;
-      });
+    var radio = e.target.closest('.task-radio');
+    if (radio){
+      var id = radio.dataset.id;
+      tasks = tasks.map(function(t){ if (t.id === id) return { id: t.id, text: t.text, completed: !t.completed }; return t; });
       render();
       return;
     }
   });
 
-  // Handle keyboard navigation for radio buttons
-  list.addEventListener('keydown', function(e) {
-    var target = e.target;
-
-    if (target.classList.contains('task-radio') && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      target.click();
+  // Keyboard toggle for radios
+  list.addEventListener('keydown', function(e){
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('task-radio')){
+      e.preventDefault(); e.target.click();
     }
   });
 
-  // Start with no tasks; show empty state
-  tasks = [];
-  render();
-
-  // Set initial list offset and update on resize
-  function initOffsets(){
-    // Call on next tick to ensure styles applied
-    setTimeout(updateListOffset, 50);
-    window.addEventListener('resize', updateListOffset);
-    // Also update when fonts load (font may change layout)
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(updateListOffset);
-    }
+  // Layout: compute header and top-area heights and set top and padding
+  function updateOffsets(){
+    if (!header || !topArea || !listArea) return;
+    var headerH = Math.ceil(header.getBoundingClientRect().height);
+    // ensure topArea uses natural height (temporarily static) to measure
+    topArea.style.position = 'fixed';
+    topArea.style.left = '50%';
+    topArea.style.transform = 'translateX(-50%)';
+    // set top to header height
+    topArea.style.top = headerH + 'px';
+    // measure top area height
+    var topH = Math.ceil(topArea.getBoundingClientRect().height);
+    // set listArea padding top to header+top heights so list appears below
+    listArea.style.paddingTop = (headerH + topH) + 'px';
   }
 
-  initOffsets();
+  // Run offsets on load/resize and after fonts ready
+  function init(){
+    render();
+    // small delay to allow layout
+    setTimeout(updateOffsets, 50);
+    window.addEventListener('resize', function(){ setTimeout(updateOffsets, 50); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(updateOffsets, 50); });
+  }
+
+  init();
 })();
