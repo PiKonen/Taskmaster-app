@@ -76,11 +76,11 @@ html, body {
 }
 
 .brand-title {
-  width: 100%;
+  width: auto;
   max-width: 330px;
   flex-shrink: 0;
   color: var(--brand-light);
-  margin: 0 0 0 8px;
+  margin: 0;
   font: 700 24px/28.8px 'DM Sans', sans-serif;
   letter-spacing: -0.48px;
   position: relative;
