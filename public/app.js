@@ -66,6 +66,10 @@
     // clear
     list.innerHTML = '';
 
+    var openCount = tasks.filter(function(t){ return !t.completed; }).length;
+    var countEl = document.getElementById('open-count');
+    if (countEl) countEl.textContent = '(' + openCount + ')';
+
     if (!tasks || tasks.length === 0){
       if (pagination) pagination.innerHTML = '';
       var empty = document.createElement('li');
