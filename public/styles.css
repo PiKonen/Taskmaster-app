@@ -47,28 +47,32 @@ html, body {
   height: 76px;
   padding: 12px 16px;
   align-items: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--background);
-  z-index: 10;
+  z-index: 1000;
   box-shadow: none;
-  margin-bottom: 12px;
 }
 
-/* Top area: header + task form container - normal document flow */
+/* Top area: fixed under header so the header and form remain at the top of the viewport */
 #top-area {
-  position: static;
+  position: fixed;
+  top: 76px; /* will be adjusted by JS if header height changes */
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   max-width: 358px;
-  margin: 0 auto;
-  z-index: 1;
+  z-index: 900;
 }
 
-/* List area sits below the top area in normal flow */
+/* List area sits below the top area; padding-top will be computed dynamically */
 #list-area {
   width: 100%;
   max-width: 358px;
   margin: 0 auto;
-  padding-top: 0;
+  padding-top: 0; /* set by JS */
 }
 
 .brand-title {
