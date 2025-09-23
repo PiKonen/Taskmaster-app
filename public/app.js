@@ -6,19 +6,68 @@
   var header = document.querySelector('.app-header');
   var topArea = document.getElementById('top-area');
   var listArea = document.getElementById('list-area');
+  var pagination = document.getElementById('pagination');
 
   // State
   var tasks = [];
+  var pageSize = 6;
+  var currentPage = 1;
 
   // Utilities
   function createId(){ return Date.now().toString(36) + '-' + Math.floor(Math.random()*10000).toString(36); }
+  function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
-  // Render list or empty state
+  function getTotalPages(){ return Math.max(1, Math.ceil((tasks && tasks.length ? tasks.length : 0) / pageSize)); }
+
+  // Render pagination controls
+  function renderPagination(){
+    if (!pagination) return;
+    pagination.innerHTML = '';
+
+    var total = tasks.length;
+    var totalPages = getTotalPages();
+
+    if (total <= pageSize){
+      return; // no controls when not needed
+    }
+
+    // Prev
+    var prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'pager-button pager-prev' + (currentPage === 1 ? ' is-disabled' : '');
+    prev.setAttribute('aria-label','Previous page');
+    prev.textContent = 'Prev';
+    prev.dataset.page = String(currentPage - 1);
+    pagination.appendChild(prev);
+
+    // Page numbers (simple: 1..totalPages)
+    for (var p = 1; p <= totalPages; p++){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'pager-button' + (p === currentPage ? ' is-active' : '');
+      btn.textContent = String(p);
+      btn.setAttribute('aria-label','Go to page ' + p);
+      btn.dataset.page = String(p);
+      pagination.appendChild(btn);
+    }
+
+    // Next
+    var next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'pager-button pager-next' + (currentPage === totalPages ? ' is-disabled' : '');
+    next.setAttribute('aria-label','Next page');
+    next.textContent = 'Next';
+    next.dataset.page = String(currentPage + 1);
+    pagination.appendChild(next);
+  }
+
+  // Render list or empty state (for current page)
   function render(){
     // clear
     list.innerHTML = '';
 
     if (!tasks || tasks.length === 0){
+      if (pagination) pagination.innerHTML = '';
       var empty = document.createElement('li');
       empty.className = 'task-empty';
       empty.setAttribute('aria-live','polite');
@@ -28,7 +77,12 @@
       return;
     }
 
-    tasks.forEach(function(task){
+    var totalPages = getTotalPages();
+    currentPage = clamp(currentPage, 1, totalPages);
+    var start = (currentPage - 1) * pageSize;
+    var end = start + pageSize;
+
+    tasks.slice(start, end).forEach(function(task){
       var li = document.createElement('li');
       li.className = 'task-item';
       li.setAttribute('data-id', task.id);
@@ -37,20 +91,15 @@
       left.className = 'task-left';
 
       var radio = document.createElement('div');
-      radio.className = 'task-radio';
+      radio.className = 'task-radio' + (task.completed ? ' task-radio--checked' : '');
       radio.setAttribute('role','checkbox');
       radio.setAttribute('aria-checked', task.completed ? 'true' : 'false');
       radio.setAttribute('tabindex','0');
       radio.dataset.id = task.id;
-      if (task.completed){
-        radio.style.background = 'var(--brand)';
-        radio.style.borderColor = 'var(--brand)';
-      }
 
       var txt = document.createElement('div');
-      txt.className = 'task-text';
+      txt.className = 'task-text' + (task.completed ? ' task-text--completed' : '');
       txt.textContent = task.text;
-      if (task.completed){ txt.style.textDecoration = 'line-through'; txt.style.opacity = '0.6'; }
 
       left.appendChild(radio);
       left.appendChild(txt);
@@ -67,21 +116,25 @@
       list.appendChild(li);
     });
 
+    renderPagination();
     updateOffsets();
   }
 
   // Add task
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var val = (input.value || '').trim();
-    var err = document.getElementById('task-error');
-    if (!val){ if (err) { err.textContent = 'Please enter a task.'; } input.focus(); return; }
-    if (err) err.textContent = '';
+  if (form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var val = (input.value || '').trim();
+      var err = document.getElementById('task-error');
+      if (!val){ if (err) { err.textContent = 'Please enter a task.'; } input.focus(); return; }
+      if (err) err.textContent = '';
 
-    tasks.unshift({ id: createId(), text: val, completed: false });
-    input.value = '';
-    render();
-  });
+      tasks.unshift({ id: createId(), text: val, completed: false });
+      input.value = '';
+      currentPage = 1; // show newest on first page
+      render();
+    });
+  }
 
   // Delegate clicks (delete, toggle)
   list.addEventListener('click', function(e){
@@ -89,18 +142,34 @@
     if (btn){
       var id = btn.dataset.id;
       tasks = tasks.filter(function(t){ return t.id !== id; });
+      var totalPages = getTotalPages();
+      currentPage = clamp(currentPage, 1, totalPages);
       render();
       return;
     }
 
     var radio = e.target.closest('.task-radio');
     if (radio){
-      var id = radio.dataset.id;
-      tasks = tasks.map(function(t){ if (t.id === id) return { id: t.id, text: t.text, completed: !t.completed }; return t; });
+      var id2 = radio.dataset.id;
+      tasks = tasks.map(function(t){ if (t.id === id2) return { id: t.id, text: t.text, completed: !t.completed }; return t; });
       render();
       return;
     }
   });
+
+  // Pagination click handling
+  if (pagination){
+    pagination.addEventListener('click', function(e){
+      var btn = e.target.closest('.pager-button');
+      if (!btn || btn.classList.contains('is-disabled')) return;
+      var page = parseInt(btn.dataset.page, 10);
+      if (!isNaN(page)){
+        var totalPages = getTotalPages();
+        currentPage = clamp(page, 1, totalPages);
+        render();
+      }
+    });
+  }
 
   // Keyboard toggle for radios
   list.addEventListener('keydown', function(e){
@@ -113,22 +182,14 @@
   function updateOffsets(){
     if (!header || !topArea || !listArea) return;
     var headerH = Math.ceil(header.getBoundingClientRect().height);
-    // ensure topArea uses natural height (temporarily static) to measure
-    topArea.style.position = 'fixed';
-    topArea.style.left = '50%';
-    topArea.style.transform = 'translateX(-50%)';
-    // set top to header height
     topArea.style.top = headerH + 'px';
-    // measure top area height
     var topH = Math.ceil(topArea.getBoundingClientRect().height);
-    // set listArea padding top to header+top heights so list appears below
     listArea.style.paddingTop = (headerH + topH) + 'px';
   }
 
   // Run offsets on load/resize and after fonts ready
   function init(){
     render();
-    // small delay to allow layout
     setTimeout(updateOffsets, 50);
     window.addEventListener('resize', function(){ setTimeout(updateOffsets, 50); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(updateOffsets, 50); });
