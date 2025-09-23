@@ -40,8 +40,8 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,system-ui,Segoe UI,Rob
 .task-list{list-style:none;margin-top:8px;padding:0}
 
 .task-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--borders);background:transparent}
-.task-left{display:flex;align-items:flex-start;gap:12px;flex:1}
-.task-radio{width:16px;height:16px;border-radius:50%;border:1px solid var(--muted);background:#fff;flex-shrink:0;margin-top:6px}
+.task-left{display:flex;align-items:center;gap:12px;flex:1}
+.task-radio{width:16px;height:16px;border-radius:50%;border:1px solid var(--muted);background:#fff;flex-shrink:0}
 .task-text{font-size:14px;line-height:17px;color:var(--text)}
 .delete-button{background:none;border:none;width:35px;height:35px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 
