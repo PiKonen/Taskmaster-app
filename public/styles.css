@@ -25,13 +25,13 @@ html, body {
 
 /* App container - centered wrapper */
 .app-container {
-  min-height: 100vh;
+  min-height: 878px;
   max-width: 390px;
   margin: 0 auto;
   background: var(--background);
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
   padding: 12px 0 40px;
   flex-direction: column;
   position: relative;
@@ -56,9 +56,8 @@ html, body {
   color: var(--brand-light);
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 24px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 120%;
+  margin: auto 0;
+  font: 500 24px/28.8px DM Sans, sans-serif;
   letter-spacing: -0.48px;
   position: relative;
   left: auto;
@@ -75,17 +74,16 @@ html, body {
 /* Task container - white card matching Figma exactly */
 .task-container {
   display: flex;
-  width: 358px;
-  padding: 16px 12px 0;
+  width: 390px;
+  padding: 16px 12px 20px;
   flex-direction: column;
   align-items: center;
   gap: 11px;
   border-radius: 12px;
   background: var(--white);
   position: relative;
-  left: auto;
-  top: auto;
-  height: 563px;
+  height: 589px;
+  margin-bottom: auto;
 }
 
 /* Page title */
@@ -159,7 +157,7 @@ html, body {
 
 .add-button {
   display: flex;
-  width: 335px;
+  width: 367px;
   padding: 12px 32px;
   justify-content: center;
   align-items: center;
