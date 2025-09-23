@@ -32,7 +32,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 0 40px;
+  padding: 0 0 40px;
   flex-direction: column;
   position: relative;
 }
@@ -56,8 +56,8 @@ html, body {
   color: var(--brand-light);
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 24px;
-  margin: auto 0;
-  font: 500 24px/28.8px DM Sans, sans-serif;
+  margin: auto;
+  font: 500 24px/28.8px 'DM Sans', sans-serif;
   letter-spacing: -0.48px;
   position: relative;
   left: auto;
@@ -69,6 +69,10 @@ html, body {
 .main-content {
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* Task container - white card matching Figma exactly */
@@ -83,7 +87,7 @@ html, body {
   background: var(--white);
   position: relative;
   height: 589px;
-  margin-bottom: auto;
+  margin: 20px 0 auto;
 }
 
 /* Page title */
