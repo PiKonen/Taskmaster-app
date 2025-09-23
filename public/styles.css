@@ -45,7 +45,10 @@ html, body {
   height: 76px;
   padding: 18px 25px;
   align-items: center;
-  position: relative;
+  position: sticky;
+  top: 0;
+  background: var(--background);
+  z-index: 20;
   left: auto;
   top: auto;
   margin-bottom: 6px;
@@ -86,7 +89,9 @@ html, body {
   gap: 16px;
   border-radius: 12px;
   background: var(--white);
-  position: relative;
+  position: sticky;
+  top: 76px;
+  z-index: 10;
   height: auto;
   margin: 8px 0 0;
   box-shadow: none;
@@ -221,6 +226,11 @@ html, body {
   align-self: stretch;
   list-style: none;
   position: relative;
+}
+
+/* Ensure list can grow and scroll behind the sticky header/form */
+.task-list-wrap {
+  width: 100%;
 }
 
 .task-item {
