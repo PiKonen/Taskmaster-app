@@ -14,9 +14,14 @@
     var header = document.querySelector('.app-header');
     var topArea = document.getElementById('top-area');
     var listArea = document.getElementById('list-area');
-    var offset = 0;
-    if (header) offset += Math.ceil(header.getBoundingClientRect().height);
-    if (topArea) offset += Math.ceil(topArea.getBoundingClientRect().height);
+    var headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+    // set top-area directly below header to avoid overlap
+    if (topArea) {
+      topArea.style.top = headerH + 'px';
+    }
+    // compute offset for list area: header + topArea heights
+    var topAreaH = topArea ? Math.ceil(topArea.getBoundingClientRect().height) : 0;
+    var offset = headerH + topAreaH;
     if (listArea) listArea.style.paddingTop = offset + 'px';
   }
 
