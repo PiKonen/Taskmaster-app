@@ -10,6 +10,16 @@
     return Date.now().toString(36) + '-' + idSeq.toString(36);
   }
 
+  function updateListOffset(){
+    var header = document.querySelector('.app-header');
+    var topArea = document.getElementById('top-area');
+    var listArea = document.getElementById('list-area');
+    var offset = 0;
+    if (header) offset += header.offsetHeight;
+    if (topArea) offset += topArea.offsetHeight;
+    if (listArea) listArea.style.paddingTop = offset + 'px';
+  }
+
   function render(){
     while(list.firstChild){
       list.removeChild(list.firstChild);
@@ -33,6 +43,7 @@
 
       emptyLi.appendChild(emptyText);
       list.appendChild(emptyLi);
+      updateListOffset();
       return;
     }
 
@@ -89,6 +100,7 @@
       li.appendChild(deleteBtn);
       list.appendChild(li);
     }
+    updateListOffset();
   }
 
   // Handle form submission
