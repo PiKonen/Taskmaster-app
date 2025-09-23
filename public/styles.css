@@ -73,6 +73,8 @@ html, body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  height: auto;
+  flex-grow: 0;
 }
 
 /* Task container - white card matching Figma exactly */
