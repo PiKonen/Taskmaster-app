@@ -23,29 +23,31 @@ html, body {
   line-height: 1.5;
 }
 
-/* App container - mobile-first with 390px max-width */
+/* App container - centered wrapper */
 .app-container {
   min-height: 100vh;
   max-width: 390px;
   margin: 0 auto;
   background: var(--background);
-  display: inline-flex;
-  padding: 0 15px 205px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
   flex-direction: column;
-  align-items: flex-end;
   position: relative;
 }
 
 /* Header */
 .app-header {
   display: flex;
-  width: 375px;
+  width: 100%;
   height: 76px;
   padding: 24px 25px 23px 20px;
   align-items: center;
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
+  left: auto;
+  top: auto;
+  margin-bottom: 12px;
 }
 
 .brand-title {
@@ -58,9 +60,9 @@ html, body {
   font-weight: 900;
   line-height: 120%;
   letter-spacing: -0.48px;
-  position: absolute;
-  left: 20px;
-  top: 24px;
+  position: relative;
+  left: auto;
+  top: auto;
   height: 29px;
 }
 
@@ -80,9 +82,9 @@ html, body {
   gap: 11px;
   border-radius: 12px;
   background: var(--white);
-  position: absolute;
-  left: 16px;
-  top: 76px;
+  position: relative;
+  left: auto;
+  top: auto;
   height: 563px;
 }
 
