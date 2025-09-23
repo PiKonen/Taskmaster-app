@@ -29,21 +29,28 @@ html, body {
   max-width: 390px;
   margin: 0 auto;
   background: var(--background);
-  display: flex;
+  display: inline-flex;
+  padding: 0 15px 205px 0;
   flex-direction: column;
+  align-items: flex-end;
+  position: relative;
 }
 
 /* Header */
 .app-header {
   display: flex;
-  width: 100%;
+  width: 375px;
   height: 76px;
-  padding: 24px 20px 23px;
+  padding: 24px 25px 23px 20px;
   align-items: center;
-  background: var(--background);
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .brand-title {
+  width: 330px;
+  flex-shrink: 0;
   color: var(--brand-light);
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 24px;
@@ -51,29 +58,32 @@ html, body {
   font-weight: 900;
   line-height: 120%;
   letter-spacing: -0.48px;
+  position: absolute;
+  left: 20px;
+  top: 24px;
+  height: 29px;
 }
 
 /* Main content */
 .main-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 0 16px;
+  position: relative;
+  width: 100%;
 }
 
-/* Task container - white card matching Figma */
+/* Task container - white card matching Figma exactly */
 .task-container {
   display: flex;
-  width: 100%;
-  max-width: 358px;
-  padding: 32px 12px 40px;
+  width: 358px;
+  padding: 32px 12px 0;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 11px;
   border-radius: 12px;
   background: var(--white);
-  margin-top: 0;
-  min-height: 563px;
+  position: absolute;
+  left: 16px;
+  top: 76px;
+  height: 563px;
 }
 
 /* Page title */
@@ -85,6 +95,7 @@ html, body {
   font-weight: 700;
   line-height: 36px;
   text-align: center;
+  position: relative;
 }
 
 /* Form styles */
@@ -111,12 +122,16 @@ html, body {
   gap: 16px;
   align-self: stretch;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .input-wrapper {
   height: 44px;
   flex: 1 0 0;
-  min-width: 200px;
+  border-radius: 4px;
+  border: 1px solid var(--borders);
+  background: var(--white);
+  position: relative;
 }
 
 .task-input {
@@ -142,7 +157,7 @@ html, body {
 
 .add-button {
   display: flex;
-  width: 100%;
+  width: 335px;
   padding: 12px 32px;
   justify-content: center;
   align-items: center;
@@ -154,10 +169,10 @@ html, body {
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 23px;
   letter-spacing: -0.135px;
-  min-height: 44px;
+  position: relative;
 }
 
 .add-button:hover {
@@ -174,10 +189,15 @@ html, body {
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  gap: 24px;
+  gap: 0;
 }
 
 .tasks-heading {
+  display: flex;
+  height: 60px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: stretch;
   color: var(--text-color);
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
@@ -185,6 +205,8 @@ html, body {
   font-weight: 400;
   line-height: 36px;
   letter-spacing: -0.135px;
+  position: relative;
+  margin: 0;
 }
 
 /* Task list */
@@ -195,6 +217,7 @@ html, body {
   gap: -1px;
   align-self: stretch;
   list-style: none;
+  position: relative;
 }
 
 .task-item {
@@ -205,11 +228,7 @@ html, body {
   align-self: stretch;
   border-top: 1px solid var(--borders);
   border-bottom: 1px solid var(--borders);
-  margin-top: -1px;
-}
-
-.task-item:first-child {
-  margin-top: 0;
+  position: relative;
 }
 
 .task-radio-group {
@@ -217,6 +236,7 @@ html, body {
   align-items: center;
   gap: 8px;
   flex: 1 0 0;
+  position: relative;
 }
 
 .task-radio {
@@ -230,6 +250,7 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
 }
 
 .task-radio:hover {
@@ -259,6 +280,7 @@ html, body {
   line-height: 17px;
   word-break: break-word;
   margin: 0;
+  position: relative;
 }
 
 .delete-button {
@@ -271,6 +293,7 @@ html, body {
   justify-content: center;
   width: 35px;
   height: 35px;
+  position: relative;
 }
 
 .delete-button svg {
@@ -286,21 +309,31 @@ html, body {
 @media (min-width: 768px) {
   .app-container {
     max-width: 800px;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
   }
   
   .task-container {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-top: 100px;
     max-width: 600px;
   }
   
-  .form-controls {
-    flex-direction: row;
-    align-items: flex-end;
+  .app-header {
+    position: relative;
+    width: 100%;
+    left: auto;
+    top: auto;
   }
   
-  .add-button {
-    width: auto;
-    min-width: 120px;
-    flex-shrink: 0;
+  .brand-title {
+    position: relative;
+    left: auto;
+    top: auto;
   }
 }
 
