@@ -159,7 +159,7 @@
     var radio = e.target.closest('.task-radio');
     if (radio){
       var id2 = radio.dataset.id;
-      tasks = tasks.map(function(t){ if (t.id === id2) return { id: t.id, text: t.text, completed: !t.completed }; return t; });
+      tasks = tasks.map(function(t){ if (t.id === id2){ var currently = (t.completed === true || t.completed === 'true'); return { id: t.id, text: t.text, completed: !currently }; } return t; });
       render();
       return;
     }
