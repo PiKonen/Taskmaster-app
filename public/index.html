@@ -10,34 +10,32 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-container">
+    <div class="app-root">
       <header class="app-header">
-        <h1 class="brand-title">TaskMaster</h1>
+        <div class="header-inner">
+          <div class="brand-title">TaskMaster</div>
+        </div>
       </header>
 
-      <main class="main-content">
-        <div class="task-container" id="top-area">
+      <!-- Top area (card with form) - will be visually fixed below header via JS to keep it at top of view -->
+      <div id="top-area" class="top-area">
+        <div class="task-card">
           <h2 class="page-title">Add new task</h2>
 
           <form class="task-form" autocomplete="off">
             <div class="form-error" id="task-error" aria-live="polite"></div>
-            <div class="form-controls">
-              <div class="input-wrapper">
-                <input
-                  id="task-input"
-                  class="task-input"
-                  type="text"
-                  name="task"
-                  aria-describedby="task-error"
-                  placeholder="Enter your task..."
-                />
-              </div>
-              <button class="add-button" type="submit">Add new</button>
+
+            <div class="input-wrapper">
+              <input id="task-input" class="task-input" type="text" name="task" aria-describedby="task-error" placeholder="Enter your task...">
             </div>
+
+            <button class="add-button" type="submit">Add new</button>
           </form>
         </div>
+      </div>
 
-        <section class="tasks-section" id="list-area">
+      <main class="main-content">
+        <section id="list-area" class="tasks-section">
           <h3 class="tasks-heading">My tasks</h3>
           <ul class="task-list" aria-live="polite"></ul>
         </section>
