@@ -13,8 +13,29 @@
   function render(){
     while(list.firstChild){
       list.removeChild(list.firstChild);
-    } 
-    
+    }
+
+    // Empty state
+    if (!tasks || tasks.length === 0) {
+      var emptyLi = document.createElement('li');
+      emptyLi.className = 'task-empty';
+      emptyLi.setAttribute('aria-live', 'polite');
+      emptyLi.style.padding = '20px 0';
+      emptyLi.style.textAlign = 'center';
+      emptyLi.style.color = 'var(--light-text)';
+      emptyLi.style.width = '100%';
+
+      var emptyText = document.createElement('div');
+      emptyText.textContent = 'No tasks, congrats!';
+      emptyText.style.fontFamily = "DM Sans, -apple-system, Roboto, Helvetica, sans-serif";
+      emptyText.style.fontSize = '16px';
+      emptyText.style.color = '#3D4147';
+
+      emptyLi.appendChild(emptyText);
+      list.appendChild(emptyLi);
+      return;
+    }
+
     for(var i = 0; i < tasks.length; i++){
       var task = tasks[i];
       var li = document.createElement('li');
@@ -32,7 +53,7 @@
       radioButton.setAttribute('aria-checked', task.completed ? 'true' : 'false');
       radioButton.setAttribute('tabindex', '0');
       radioButton.setAttribute('data-id', task.id);
-      
+
       if (task.completed) {
         radioButton.classList.add('checked');
       }
@@ -55,7 +76,7 @@
       deleteBtn.type = 'button';
       deleteBtn.setAttribute('data-id', task.id);
       deleteBtn.setAttribute('aria-label', 'Delete task: ' + task.text);
-      
+
       // Add delete icon SVG from Figma design
       deleteBtn.innerHTML = `
         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
