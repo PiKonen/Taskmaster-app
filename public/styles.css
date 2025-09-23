@@ -42,11 +42,20 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,system-ui,Segoe UI,Rob
 .task-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--borders);background:transparent}
 .task-left{display:flex;align-items:center;gap:12px;flex:1}
 .task-radio{width:16px;height:16px;border-radius:50%;border:1px solid var(--muted);background:#fff;flex-shrink:0}
+.task-radio--checked{background:var(--brand);border-color:var(--brand)}
 .task-text{font-size:14px;line-height:17px;color:var(--text)}
+.task-text--completed{text-decoration:line-through;opacity:0.6}
 .delete-button{background:none;border:none;width:35px;height:35px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 
 /* Empty state */
 .task-empty{padding:20px 16px;text-align:center;color:var(--muted);font-size:16px}
+
+/* Pagination */
+.pagination-wrapper{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px}
+.pager-button{min-width:34px;height:34px;padding:0 10px;border:1px solid var(--borders);background:var(--card);color:var(--text);border-radius:8px;cursor:pointer;font-weight:600}
+.pager-button.is-active{background:var(--brand);border-color:var(--brand);color:#fff}
+.pager-button.is-disabled{opacity:.5;pointer-events:none}
+.pager-ellipsis{color:var(--muted);padding:0 4px}
 
 /* Responsive tweaks */
 @media (min-width:768px){
