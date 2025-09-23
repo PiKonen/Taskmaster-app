@@ -145,7 +145,13 @@
     }
   });
 
-  // Start with an empty task list
-  tasks = [];
+  // Start with default tasks matching Figma design
+  tasks = [
+    { id: createId(), text: 'Lorem ipsum dolor sit amet ja sitä rataaa. miten kasvaa?\nJaksaako, jaksaa', completed: false },
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false },
+    { id: createId(), text: 'Default', completed: false }
+  ];
   render();
 })();
