@@ -93,11 +93,7 @@ html, body {
 /* Page title */
 .page-title {
   color: var(--text-color);
-  font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
+  font: 700 26px/36px 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   text-align: center;
   position: relative;
 }
