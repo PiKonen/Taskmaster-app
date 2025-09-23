@@ -66,7 +66,11 @@
     // clear
     list.innerHTML = '';
 
-    var openCount = tasks.filter(function(t){ return !t.completed; }).length;
+    // Robustly determine open tasks: support boolean or string values for `completed`
+    var openCount = tasks.filter(function(t){
+      var completed = (t.completed === true || t.completed === 'true');
+      return !completed;
+    }).length;
     var countEl = document.getElementById('open-count');
     if (countEl) countEl.textContent = '(' + openCount + ')';
 
