@@ -23,19 +23,20 @@ html, body {
   line-height: 1.5;
 }
 
-/* App container - centered wrapper (mobile-first) */
+/* App container - top-aligned wrapper (mobile-first) */
 .app-container {
   min-height: 100vh;
   max-width: 390px;
   margin: 0 auto;
   background: var(--background);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  padding: 12px 12px 40px;
+  padding: 12px 12px 40px 12px;
   flex-direction: column;
   position: relative;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* Header */
