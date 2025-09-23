@@ -30,9 +30,9 @@ html, body {
   margin: 0 auto;
   background: var(--background);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 20px;
+  padding: 12px 0 40px;
   flex-direction: column;
   position: relative;
 }
@@ -42,12 +42,12 @@ html, body {
   display: flex;
   width: 100%;
   height: 76px;
-  padding: 24px 25px 23px 20px;
+  padding: 18px 25px 12px 20px;
   align-items: center;
   position: relative;
   left: auto;
   top: auto;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .brand-title {
@@ -76,7 +76,7 @@ html, body {
 .task-container {
   display: flex;
   width: 358px;
-  padding: 32px 12px 0;
+  padding: 16px 12px 0;
   flex-direction: column;
   align-items: center;
   gap: 11px;
