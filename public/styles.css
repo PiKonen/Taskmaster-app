@@ -71,7 +71,7 @@ html, body {
   width: 100%;
   max-width: 358px;
   margin: 0 auto;
-  padding-top: calc(76px + 200px);
+  padding-top: 0; /* dynamically set via JS */
 }
 
 .brand-title {
