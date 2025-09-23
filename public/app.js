@@ -38,7 +38,7 @@
       }
 
       // Create task text
-      var taskText = document.createElement('p');
+      var taskText = document.createElement('div');
       taskText.className = 'task-text';
       taskText.textContent = task.text;
       if (task.completed) {
@@ -49,19 +49,18 @@
       radioGroup.appendChild(radioButton);
       radioGroup.appendChild(taskText);
 
-      // Create delete button with icon
+      // Create delete button with X icon matching Figma design
       var deleteBtn = document.createElement('button');
       deleteBtn.className = 'delete-button';
       deleteBtn.type = 'button';
       deleteBtn.setAttribute('data-id', task.id);
       deleteBtn.setAttribute('aria-label', 'Delete task: ' + task.text);
       
-      // Add delete icon SVG
+      // Add delete icon SVG from Figma design
       deleteBtn.innerHTML = `
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 5H9L2 12L9 19H20C20.5304 19 21.0391 18.7893 21.4142 18.4142C21.7893 18.0391 22 17.5304 22 17V7C22 6.46957 21.7893 5.96086 21.4142 5.58579C21.0391 5.21071 20.5304 5 20 5Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M18 9L12 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 9L18 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26.25 13.125L17.5 21.875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17.5 13.125L26.25 21.875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       `;
 
