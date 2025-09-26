@@ -1,3 +1,3 @@
-# Taskmaster
+# TaskMaster Pro
 
 Own test project
