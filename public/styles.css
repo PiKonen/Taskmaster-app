@@ -2,7 +2,7 @@
 :root{
   --bg:#F9F9F9;
   --card:#FFFFFF;
-  --brand:#0066FF;
+  --brand:#FF0000;
   --borders:#CED1D4;
   --text:#000000;
   --muted:#3D4147;
@@ -13,6 +13,8 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,system-ui,Segoe UI,Rob
 
 /* App root */
 .app-root{min-height:100vh;max-width:390px;margin:0 auto;position:relative;overflow-x:hidden}
+
+.menu-icon-lines{stroke:var(--brand)}
 
 /* Header: flush with top of viewport */
 .app-header{position:fixed;top:0;left:0;right:0;height:76px;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;padding:12px}
