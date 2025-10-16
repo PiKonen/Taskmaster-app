@@ -20,6 +20,15 @@
   function createId(){ return Date.now().toString(36) + '-' + Math.floor(Math.random()*10000).toString(36); }
   function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
+  // Format timestamp to dd/mm/yy
+  function formatDate(ts){
+    var d = new Date(ts);
+    var dd = String(d.getDate()).padStart(2,'0');
+    var mm = String(d.getMonth() + 1).padStart(2,'0');
+    var yy = String(d.getFullYear()).slice(-2);
+    return dd + '/' + mm + '/' + yy;
+  }
+
   function getTotalPages(){ return Math.max(1, Math.ceil((tasks && tasks.length ? tasks.length : 0) / pageSize)); }
 
   function seedInitialTasks(){
@@ -49,14 +58,17 @@
 
     var used = {};
     var count = 5;
+    var maxDays = 30; // randomize within the last 30 days
     for (var i = 0; i < count; i++){
       var pick;
       do {
         pick = samples[Math.floor(Math.random() * samples.length)];
       } while (used[pick]);
       used[pick] = true;
-      // Stagger createdAt slightly so seeded tasks have different dates
-      tasks.push({ id: createId(), text: pick, completed: false, createdAt: Date.now() - (i * 1000) });
+      // Random createdAt within the last `maxDays` days (random day + random time of day)
+      var daysAgo = Math.floor(Math.random() * (maxDays + 1));
+      var msOffset = (daysAgo * 24 * 60 * 60 * 1000) + Math.floor(Math.random() * (24 * 60 * 60 * 1000));
+      tasks.push({ id: createId(), text: pick, completed: false, createdAt: Date.now() - msOffset });
     }
   }
 
@@ -148,12 +160,22 @@
       radio.setAttribute('tabindex','0');
       radio.dataset.id = task.id;
 
+      var content = document.createElement('div');
+      content.className = 'task-content';
+
       var txt = document.createElement('div');
       txt.className = 'task-text' + (task.completed ? ' task-text--completed' : '');
       txt.textContent = task.text;
 
+      var dateEl = document.createElement('div');
+      dateEl.className = 'task-date';
+      dateEl.textContent = formatDate(task.createdAt);
+
+      content.appendChild(txt);
+      content.appendChild(dateEl);
+
       left.appendChild(radio);
-      left.appendChild(txt);
+      left.appendChild(content);
 
       var del = document.createElement('button');
       del.className = 'delete-button';

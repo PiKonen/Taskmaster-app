@@ -57,6 +57,9 @@ html,body{height:100%;font-family:'Schibsted Grotesk',-apple-system,system-ui,Se
 .task-radio--checked{background:var(--brand);border-color:var(--brand)}
 .task-text{font:300 14px/17px Schibsted Grotesk, sans-serif;color:var(--text)}
 .task-text--completed{text-decoration:line-through;opacity:0.6}
+
+.task-content{display:flex;flex-direction:column}
+.task-date{font:300 12px/14px Schibsted Grotesk, sans-serif;color:var(--muted);margin-top:4px}
 .delete-button{background:none;border:none;width:35px;height:35px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 
 /* Add button label typography */
