@@ -12,6 +12,9 @@
   var tasks = [];
   var pageSize = 6;
   var currentPage = 1;
+  var sortOrder = 'newest';
+  var sortSelect = document.getElementById('sort-select');
+  if (sortSelect){ sortOrder = sortSelect.value || 'newest'; sortSelect.addEventListener('change', function(e){ sortOrder = e.target.value; currentPage = 1; render(); }); }
 
   // Utilities
   function createId(){ return Date.now().toString(36) + '-' + Math.floor(Math.random()*10000).toString(36); }
@@ -52,7 +55,8 @@
         pick = samples[Math.floor(Math.random() * samples.length)];
       } while (used[pick]);
       used[pick] = true;
-      tasks.push({ id: createId(), text: pick, completed: false });
+      // Stagger createdAt slightly so seeded tasks have different dates
+      tasks.push({ id: createId(), text: pick, completed: false, createdAt: Date.now() - (i * 1000) });
     }
   }
 
@@ -127,7 +131,9 @@
     var start = (currentPage - 1) * pageSize;
     var end = start + pageSize;
 
-    tasks.slice(start, end).forEach(function(task){
+    // Apply sorting by createdAt before paginating
+    var sortedTasks = (tasks && tasks.length) ? tasks.slice().sort(function(a,b){ return sortOrder === 'newest' ? (b.createdAt - a.createdAt) : (a.createdAt - b.createdAt); }) : [];
+    sortedTasks.slice(start, end).forEach(function(task){
       var li = document.createElement('li');
       li.className = 'task-item';
       li.setAttribute('data-id', task.id);
@@ -174,7 +180,7 @@
       if (!val){ if (err) { err.textContent = 'Please enter a task.'; } input.focus(); return; }
       if (err) err.textContent = '';
 
-      tasks.unshift({ id: createId(), text: val, completed: false });
+      tasks.unshift({ id: createId(), text: val, completed: false, createdAt: Date.now() });
       input.value = '';
       currentPage = 1; // show newest on first page
       render();
@@ -196,7 +202,7 @@
     var radio = e.target.closest('.task-radio');
     if (radio){
       var id2 = radio.dataset.id;
-      tasks = tasks.map(function(t){ if (t.id === id2){ var currently = (t.completed === true || t.completed === 'true'); return { id: t.id, text: t.text, completed: !currently }; } return t; });
+      tasks = tasks.map(function(t){ if (t.id === id2){ var currently = (t.completed === true || t.completed === 'true'); return { id: t.id, text: t.text, completed: !currently, createdAt: t.createdAt }; } return t; });
       render();
       return;
     }
