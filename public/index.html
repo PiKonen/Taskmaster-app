@@ -21,7 +21,6 @@
       <div id="top-area" class="top-area">
         <div class="task-card">
           <h2 class="page-title">Add new task</h2>
-
           <form class="task-form" autocomplete="off">
             <div class="form-error" id="task-error" aria-live="polite"></div>
 
@@ -33,9 +32,19 @@
           </form>
 
           <section class="tasks-section card-tasks">
+            <div class="tasks-header">
             <h3 class="tasks-heading">My tasks <span id="open-count" class="open-count" aria-live="polite">(0)</span></h3>
-            <ul class="task-list" aria-live="polite"></ul>
-            <nav id="pagination" class="pagination-wrapper" aria-label="Pagination"></nav>
+            <div class="tasks-sort">
+              <label for="sort-select" class="visually-hidden">Sort tasks</label>
+              <select id="sort-select" class="sort-select" aria-label="Sort tasks">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+              </select>
+            </div>
+          </div>
+
+          <ul class="task-list" aria-live="polite"></ul>
+          <nav id="pagination" class="pagination-wrapper" aria-label="Pagination"></nav>
           </section>
         </div>
       </div>
