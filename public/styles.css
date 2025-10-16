@@ -9,7 +9,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'DM Sans',-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+html,body{height:100%;font-family:'Open Sans',-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
 
 /* App root */
 .app-root{min-height:100vh;max-width:390px;margin:0 auto;position:relative;overflow-x:hidden}
@@ -19,7 +19,7 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,system-ui,Segoe UI,Rob
 /* Header: flush with top of viewport */
 .app-header{position:fixed;top:0;left:0;right:0;height:76px;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;padding:12px}
 .header-inner{width:100%;max-width:390px;padding:0 16px}
-.brand-title{color:var(--brand);font:700 24px/28.8px 'Archivo', sans-serif;margin:0 auto;text-align:center}
+.brand-title{color:var(--brand);font:700 24px/28.8px 'Open Sans', sans-serif;margin:0 auto;text-align:center}
 
 /* Top area (card) - will be positioned below header via JS */
 .top-area{position:fixed;left:50%;transform:translateX(-50%);width:100%;max-width:358px;z-index:900}
