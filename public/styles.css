@@ -9,7 +9,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'Open Sans',-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:300;background:var(--bg);color:var(--text)}
+html,body{height:100%;font-family:'Schibsted Grotesk',-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:300;background:var(--bg);color:var(--text)}
 
 /* App root */
 .app-root{min-height:100vh;max-width:390px;margin:0 auto;position:relative;overflow-x:hidden}
