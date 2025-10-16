@@ -20,6 +20,15 @@
   function createId(){ return Date.now().toString(36) + '-' + Math.floor(Math.random()*10000).toString(36); }
   function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
+  // Format timestamp to dd/mm/yy
+  function formatDate(ts){
+    var d = new Date(ts);
+    var dd = String(d.getDate()).padStart(2,'0');
+    var mm = String(d.getMonth() + 1).padStart(2,'0');
+    var yy = String(d.getFullYear()).slice(-2);
+    return dd + '/' + mm + '/' + yy;
+  }
+
   function getTotalPages(){ return Math.max(1, Math.ceil((tasks && tasks.length ? tasks.length : 0) / pageSize)); }
 
   function seedInitialTasks(){
