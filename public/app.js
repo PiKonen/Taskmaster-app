@@ -19,6 +19,43 @@
 
   function getTotalPages(){ return Math.max(1, Math.ceil((tasks && tasks.length ? tasks.length : 0) / pageSize)); }
 
+  function seedInitialTasks(){
+    if (tasks && tasks.length) return;
+    var samples = [
+      'Buy groceries for the week',
+      'Schedule annual health checkup',
+      'Call the bank about new card',
+      'Water the indoor plants',
+      'Plan weekend hiking route',
+      'Review monthly budget',
+      'Clean out email inbox',
+      'Back up phone photos',
+      'Read 20 pages of a book',
+      'Prep lunches for tomorrow',
+      'Organize workspace drawer',
+      'Pay electricity bill',
+      'Practice 15 minutes of piano',
+      'Refill reusable water bottle',
+      'Take a 20-minute walk',
+      'Update password manager',
+      'Write thank-you note',
+      'Stretch for 10 minutes',
+      'Check smoke detector batteries',
+      'Declutter downloads folder'
+    ];
+
+    var used = {};
+    var count = 5;
+    for (var i = 0; i < count; i++){
+      var pick;
+      do {
+        pick = samples[Math.floor(Math.random() * samples.length)];
+      } while (used[pick]);
+      used[pick] = true;
+      tasks.push({ id: createId(), text: pick, completed: false });
+    }
+  }
+
   // Render pagination controls
   function renderPagination(){
     if (!pagination) return;
@@ -197,6 +234,7 @@
 
   // Run offsets on load/resize and after fonts ready
   function init(){
+    seedInitialTasks();
     render();
     setTimeout(updateOffsets, 50);
     window.addEventListener('resize', function(){ setTimeout(updateOffsets, 50); });
