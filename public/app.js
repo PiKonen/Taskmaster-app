@@ -5,7 +5,7 @@
   var list = document.querySelector('.task-list');
   var header = document.querySelector('.app-header');
   var topArea = document.getElementById('top-area');
-  var listArea = document.getElementById('list-area');
+  var listArea = document.querySelector('.main-content');
   var pagination = document.getElementById('pagination');
 
   // State
