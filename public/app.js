@@ -58,14 +58,17 @@
 
     var used = {};
     var count = 5;
+    var maxDays = 30; // randomize within the last 30 days
     for (var i = 0; i < count; i++){
       var pick;
       do {
         pick = samples[Math.floor(Math.random() * samples.length)];
       } while (used[pick]);
       used[pick] = true;
-      // Stagger createdAt slightly so seeded tasks have different dates
-      tasks.push({ id: createId(), text: pick, completed: false, createdAt: Date.now() - (i * 1000) });
+      // Random createdAt within the last `maxDays` days (random day + random time of day)
+      var daysAgo = Math.floor(Math.random() * (maxDays + 1));
+      var msOffset = (daysAgo * 24 * 60 * 60 * 1000) + Math.floor(Math.random() * (24 * 60 * 60 * 1000));
+      tasks.push({ id: createId(), text: pick, completed: false, createdAt: Date.now() - msOffset });
     }
   }
 
