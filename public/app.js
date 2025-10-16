@@ -157,12 +157,22 @@
       radio.setAttribute('tabindex','0');
       radio.dataset.id = task.id;
 
+      var content = document.createElement('div');
+      content.className = 'task-content';
+
       var txt = document.createElement('div');
       txt.className = 'task-text' + (task.completed ? ' task-text--completed' : '');
       txt.textContent = task.text;
 
+      var dateEl = document.createElement('div');
+      dateEl.className = 'task-date';
+      dateEl.textContent = formatDate(task.createdAt);
+
+      content.appendChild(txt);
+      content.appendChild(dateEl);
+
       left.appendChild(radio);
-      left.appendChild(txt);
+      left.appendChild(content);
 
       var del = document.createElement('button');
       del.className = 'delete-button';
